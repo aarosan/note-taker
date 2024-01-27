@@ -17,8 +17,12 @@ app.use(express.json());
 const dbFilePath = path.join(__dirname, 'db', 'db.json');
 
 //Redirect /notes to /notes.html. *AI help*
+// app.get('/notes', (req, res) => {
+//     res.redirect('/notes.html');
+// });
+
 app.get('/notes', (req, res) => {
-    res.redirect('/notes.html');
+    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
 });
 
 // API route to get notes

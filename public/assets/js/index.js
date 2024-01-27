@@ -7,7 +7,7 @@ let noteList;
 
 console.log('BEFORE IF STATEMENT');
 
-if (window.location.pathname === '/notes.html') {
+if (window.location.pathname === '/notes') {
   console.log('TEST');
   noteForm = document.querySelector('.note-form');
   noteTitle = document.querySelector('.note-title');
@@ -183,7 +183,7 @@ const renderNoteList = async (notes) => {
     noteListItems.push(li);
   });
 
-  if (window.location.pathname === '/notes.html') {
+  if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
@@ -191,7 +191,7 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
-if (window.location.pathname === '/notes.html') {
+if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   clearBtn.addEventListener('click', renderActiveNote);
