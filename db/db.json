@@ -1,33 +1,17 @@
 [
-    {
-      "id": "1",
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
-      "id": "2",
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
-      "id": "3",
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
-      "id": "4",
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
-      "id": "5",
-      "title": "Test Title",
-      "text": "Test text"
-    },
-    {
-      "id": "6",
-      "title": "Test",
-      "text": "Test"
-    }
-  ]
-  
+  {
+    "id": "2",
+    "title": "Favorite Playstation Games",
+    "text": "The Last Of Us Part 2, Spider-Man, Uncharted 4"
+  },
+  {
+    "id": "5",
+    "title": "Favorite TV Shows",
+    "text": "Modern Family, Super Store, Big Brother"
+  },
+  {
+    "id": "96b50cc7-1dd9-455c-a6d9-b2717cf78ebb",
+    "title": "Does this application work?",
+    "text": "Yes!"
+  }
+]

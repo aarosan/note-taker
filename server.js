@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -15,6 +16,11 @@ app.use(express.json());
 // Path to db
 // PUT DEFINITION OF .JOIN HERE
 const dbFilePath = path.join(__dirname, 'db', 'db.json');
+
+// this will genereate a unique ID
+const generateUniqueId = () => {
+    return uuidv4();
+};
 
 
 // When the user clicks the button that has an href to /notes, then the server will send back the notes.html file that has been set up with static files from 'public'
@@ -37,7 +43,7 @@ app.get('/api/notes', (req, res) => {
 });
 
 // API route to add a note
-// Test wiht Postman and this API route works
+// Test with Postman and this API route works
 app.post('/api/notes', (req, res) => {
     try {
         const { title, text } = req.body;
@@ -45,12 +51,36 @@ app.post('/api/notes', (req, res) => {
             return res.status(400).json({ message: 'Title and text are required' });
         }
 
-        const newNote = { title, text };
+        const newNote = { id: generateUniqueId(), title, text };
         const notes = readNotes();
         notes.push(newNote);
         writeNotes(notes);
 
         res.status(201).json(newNote);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// tested with postman and it works!
+app.delete(`/api/notes/:id`, (req, res) => {
+    try {
+        let notes = readNotes();
+        const noteId = req.params.id;
+        //shorthand arrow function to check every note in the array to see if the ids match with the one we want to delete
+        const index = notes.findIndex(note => note.id === noteId);
+
+        if(index === -1) {
+            return res.status(404).json({ message: 'Note not found' });
+        }
+
+        notes.splice(index, 1);
+
+        writeNotes(notes);
+
+        res.status(200).json({ message: 'Note deleted successfully' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
