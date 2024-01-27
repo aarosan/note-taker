@@ -14,6 +14,11 @@ app.use(express.json());
 // PUT DEFINITION OF .JOIN HERE
 const dbFilePath = path.join(__dirname, 'db', 'db.json');
 
+//Redirect /notes to /notes.html. *AI help*
+app.get('/notes', (req, res) => {
+    res.redirect('/notes.html');
+});
+
 // API route to get notes
 app.get('/api/notes', (req, res) => {
     try {
