@@ -16,11 +16,9 @@ app.use(express.json());
 // PUT DEFINITION OF .JOIN HERE
 const dbFilePath = path.join(__dirname, 'db', 'db.json');
 
-//Redirect /notes to /notes.html. *AI help*
-// app.get('/notes', (req, res) => {
-//     res.redirect('/notes.html');
-// });
 
+// When the user clicks the button that has an href to /notes, then the server will send back the notes.html file that has been set up with static files from 'public'
+// *AI help with this code
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'notes.html'));
 });
@@ -44,7 +42,7 @@ app.post('/api/notes', (req, res) => {
     try {
         const { title, text } = req.body;
         if (!title || !text) {
-            return res.statuts(400).json({ message: 'Title and text are required' });
+            return res.status(400).json({ message: 'Title and text are required' });
         }
 
         const newNote = { title, text };
