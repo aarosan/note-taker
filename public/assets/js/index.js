@@ -1,3 +1,4 @@
+// initial variable declaration
 let noteForm;
 let noteTitle;
 let noteText;
@@ -5,8 +6,10 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+
 console.log('BEFORE IF STATEMENT');
 
+// once the window has navigated to the /notes route, all of the variable we declared are assigned an html class
 if (window.location.pathname === '/notes') {
   console.log('TEST');
   noteForm = document.querySelector('.note-form');
@@ -53,7 +56,7 @@ const saveNote = (note) =>
   });
 
 
-// Need to add this app.delete request
+// function to delete the note
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -63,6 +66,7 @@ const deleteNote = (id) =>
   });
 
 
+// this function renders the note that is clicked in the left hand side bar. Any added code to this makes the new notes able to be selected.
 const renderActiveNote = () => {
   console.log('renderActiveNote Test')
   hide(saveNoteBtn);
@@ -89,6 +93,7 @@ const renderActiveNote = () => {
   }
 };
 
+// function to save a note
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -203,6 +208,7 @@ const renderNoteList = async (notes) => {
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
+// this adds click events to the buttons if the window locates to the /notes route
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);

@@ -1,3 +1,4 @@
+// module import
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -22,7 +23,6 @@ const generateUniqueId = () => {
     return uuidv4();
 };
 
-
 // When the user clicks the button that has an href to /notes, then the server will send back the notes.html file that has been set up with static files from 'public'
 // *AI help with this code
 app.get('/notes', (req, res) => {
@@ -33,8 +33,11 @@ app.get('/notes', (req, res) => {
 // Tested with Postman and this API route works
 app.get('/api/notes', (req, res) => {
     try {
+        //saves the content of db.json to data
         const data = fs.readFileSync(dbFilePath, 'utf8');
+        //parses that data into json and saves it to notes
         const notes = JSON.parse(data);
+        //response is the data from the notes in json format
         res.json(notes);
     } catch (error) {
         console.error(error);
