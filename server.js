@@ -5,7 +5,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve static files from 'public'
-app.use(express.static('public'));
+// *AI helped with getting the assets folder to be included
+app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware to parse JSON requests
 app.use(express.json());
@@ -20,6 +22,7 @@ app.get('/notes', (req, res) => {
 });
 
 // API route to get notes
+// Tested with Postman and this API route works
 app.get('/api/notes', (req, res) => {
     try {
         const data = fs.readFileSync(dbFilePath, 'utf8');
@@ -32,6 +35,7 @@ app.get('/api/notes', (req, res) => {
 });
 
 // API route to add a note
+// Test wiht Postman and this API route works
 app.post('/api/notes', (req, res) => {
     try {
         const { title, text } = req.body;
@@ -51,6 +55,7 @@ app.post('/api/notes', (req, res) => {
     }
 });
 
+// Tested with Postman and it works
 function readNotes() {
     try {
         const data = fs.readFileSync(dbFilePath, 'utf8');
@@ -61,9 +66,12 @@ function readNotes() {
     }
 }
 
+// Tested with Postman and it works
 function writeNotes(notes) {
     fs.writeFileSync(dbFilePath, JSON.stringify(notes, null, 2), 'utf8');
 }
+
+// Server is running successfully
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
